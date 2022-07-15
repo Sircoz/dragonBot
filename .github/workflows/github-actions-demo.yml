@@ -1,8 +1,8 @@
 name: Test & Deployment
-on: [push]
 jobs:
   job1:
     name: Build and Test
+    on: push
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
