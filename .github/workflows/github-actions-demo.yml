@@ -1,4 +1,4 @@
-name: Test & Deployment
+name: Test
 on: [push]
 jobs:
   job1:
@@ -13,18 +13,3 @@ jobs:
           distribution: 'adopt'
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
-
-  job2:
-    name: Deploy
-    needs: job1
-    if: ${{ github.ref == 'refs/heads/main' }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
-        with:
-          ruby-version: '3.1'
-      - run: gem install --user-install dpl-heroku
-      - run: if which ruby > /dev/null && which gem > /dev/null; then PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"; fi
-      - run: dpl --provider=heroku --app=dragon-bot-v2 --api-key=$HEROKU_API_KEY
