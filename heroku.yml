@@ -1,0 +1,6 @@
+# heroku.yml
+build:
+  docker:
+    worker: Dockerfile # path to your Dockerfile
+run:
+  worker: mvn exec:java -Dexec.mainClass="Application"
