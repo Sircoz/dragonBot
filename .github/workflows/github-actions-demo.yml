@@ -25,7 +25,6 @@ jobs:
         uses: ruby/setup-ruby@359bebbc29cbe6c87da6bc9ea3bc930432750108
         with:
           ruby-version: '3.1'
-      - run: apt update && apt install -y ruby git curl
       - run: gem install --user-install dpl-heroku
       - run: if which ruby > /dev/null && which gem > /dev/null; then PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"; fi
       - run: dpl --provider=heroku --app=dragon-bot-v2 --api-key=$HEROKU_API_KEY
